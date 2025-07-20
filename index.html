@@ -3,29 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bienvenida Quinceañera Emilia</title>
+  <title>Música Quinceañera</title>
   <style>
-    body {
-      background-color: #ffe6f0;
-      text-align: center;
-      font-family: 'Arial', sans-serif;
-      padding: 50px;
+    .audio-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
     }
-    h1 {
-      color: #d63384;
-    }
-    audio {
-      margin-top: 30px;
+    button {
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>🎀 Bienvenida a la fiesta de Emilia 🎀</h1>
-  <p>¡Prepárate para disfrutar esta noche mágica! 🌟</p>
-
-  <audio controls autoplay>
-    <source src="fondo.mp3" type="audio/mpeg">
-    Tu navegador no soporta el elemento de audio.
-  </audio>
+  <div class="audio-container">
+    <audio id="audioPlayer">
+      <source src="fondo.mp3" type="audio/mpeg">
+    </audio>
+    <button id="btnPlay">▶️</button>
+  </div>
+  <script>
+    const audio = document.getElementById('audioPlayer');
+    const btnPlay = document.getElementById('btnPlay');
+    let playing = false;
+    btnPlay.addEventListener('click', () => {
+      if (!playing) { audio.play(); btnPlay.textContent = '⏸️'; }
+      else { audio.pause(); btnPlay.textContent = '▶️'; }
+      playing = !playing;
+    });
+  </script>
 </body>
 </html>
+
