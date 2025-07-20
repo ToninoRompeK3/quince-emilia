@@ -3,36 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Música Quinceañera</title>
+  <title>Audio Quinceañera</title>
   <style>
-    .audio-container {
+    /* Contenedor centrado */
+    .audio-btn-container {
       display: flex;
       justify-content: center;
-      margin-top: 50px;
+      align-items: center;
+      height: 100vh; /* ajusta si no quieres centrado vertical absoluto */
     }
-    button {
-      font-size: 2rem;
-      padding: 0.5rem 1rem;
+
+    /* Botón circular play/pause */
+    .btn-audio {
+      background: transparent;
+      border: 2px solid gray;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .btn-audio svg {
+      width: 30px;
+      height: 30px;
+      fill: gray;
     }
   </style>
 </head>
 <body>
-  <div class="audio-container">
-    <audio id="audioPlayer">
-      <source src="fondo.mp3" type="audio/mpeg">
-    </audio>
-    <button id="btnPlay">▶️</button>
-  </div>
-  <script>
-    const audio = document.getElementById('audioPlayer');
-    const btnPlay = document.getElementById('btnPlay');
-    let playing = false;
-    btnPlay.addEventListener('click', () => {
-      if (!playing) { audio.play(); btnPlay.textContent = '⏸️'; }
-      else { audio.pause(); btnPlay.textContent = '▶️'; }
-      playing = !playing;
-    });
-  </script>
+
+<div class="audio-btn-container">
+  <button class="btn-audio" id="playPauseBtn">
+    <!-- Icono SVG de play (y cambiará a pausa) -->
+    <svg id="iconSvg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="16,8 56,32 16,56"></polygon>
+    </svg>
+  </button>
+  <audio id="audioPlayer" src="fondo.mp3"></audio>
+</div>
+
+<script>
+  const btn = document.getElementById('playPauseBtn');
+  const icon = document.getElementById('iconSvg');
+  const audio = document.getElementById('audioPlayer');
+
+  const pauseSVG = `
+    <g>
+      <rect x="18" y="12" width="10" height="40"></rect>
+      <rect x="36" y="12" width="10" height="40"></rect>
+    </g>
+  `;
+
+  btn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      icon.innerHTML = pauseSVG;
+    } else {
+      audio.pause();
+      icon.innerHTML = `<polygon points="16,8 56,32 16,56"></polygon>`;
+    }
+  });
+</script>
+
 </body>
 </html>
-
